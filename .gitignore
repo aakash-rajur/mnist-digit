@@ -1,0 +1,5 @@
+.idea
+data/external/*
+credentials.env
+resources.env
+venv

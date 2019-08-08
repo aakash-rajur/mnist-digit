@@ -1,0 +1,14 @@
+{
+  "OUTPUT": "data/processed",
+  "SOURCES": [
+    {
+      "CHARACTER": "0",
+      "INPUT": "data/external/mnist/train/0",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    }
+  ]
+}
