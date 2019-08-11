@@ -1,3 +1,4 @@
+from functools import partial
 from os import getcwd, path, makedirs
 from environs import Env
 from json import load
@@ -38,16 +39,12 @@ def main():
     output_dir = get_output_dir(cwd, config)
 
     ds_factory = data_sources_factory(precision)
-    features = extract_features(
+    extract_features(
         config=config,
         data_source_factory=ds_factory,
         parallel=True,
-        show_progress=True
-    )
-
-    save_features(
-        output_dir=output_dir,
-        features=features
+        show_progress=True,
+        done_callback=partial(save_features, output_dir)
     )
 
 
