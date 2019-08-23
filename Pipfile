@@ -13,6 +13,11 @@ scikit-learn = "*"
 pandas = "*"
 environs = "*"
 tqdm = "*"
+plotly = "*"
+notebook = "*"
+ipywidgets = "*"
+jupyterlab = "*"
+nbformat = "*"
 
 [requires]
 python_version = "3.7"
