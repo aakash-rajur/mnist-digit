@@ -1,19 +1,18 @@
-from os import getcwd, path
+import sys
+from pathlib import Path
 
+project_directory = Path('../..').resolve()
+sys.path.extend(['../..'])
+
+from os import getcwd, path
 import plotly.express as px
-from plotly import graph_objects as go
 from environs import Env
 
 from internal.feature_analysis.compile_epochs import compile_epochs
-from internal.feature_analysis.index_character_epochs import \
-    index_character_epochs, \
-    flatten_character_index
+from internal.feature_analysis.index_character_epochs import index_character_epochs, flatten_character_index
 from internal.feature_analysis.list_relevant_file import list_relevant_files
 from internal.feature_analysis.reduce_dimensions import reduce_dimensions
-from src.pkg.config_constants import \
-    PCA_COMPONENTS, \
-    INPUT
-from src.pkg.get_output_dir import get_output_dir
+from src.pkg.config_constants import PCA_COMPONENTS, INPUT
 from src.pkg.load_config import load_config
 from src.pkg.load_env import load_env
 
@@ -32,14 +31,14 @@ def get_input(config: dict) -> (str, str):
 
 def main():
     cwd = getcwd()
-    process_dir = path.join(cwd, 'cmd', 'feature_analysis')
+    process_dir = cwd
 
     env = load_env(process_dir)
     config = load_config(process_dir, env)
     pca_dimensions = get_pca_dimensions(env)
     path_name, mime = get_input(config)
 
-    meta = list_relevant_files(cwd, mime, path_name)
+    meta = list_relevant_files(project_directory, mime, path.join(project_directory, path_name))
     epochs = compile_epochs(meta)
 
     indexed = index_character_epochs(epochs)
@@ -52,11 +51,10 @@ def main():
         y='y',
         z='z',
         color='character',
-        height=1000,
-        width=1000,
+        height=900,
+        width=900,
     )
     fig.show()
-    print('DONE')
 
 
 if __name__ == '__main__':
