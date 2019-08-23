@@ -2,7 +2,7 @@ from os import path, getcwd
 
 from internal.extract_features.mnist.extract_process import get_mnist_instance
 from src.pkg.load_env import load_env
-import internal.extract_features.config_constants as constants
+import src.pkg.config_constants as constants
 
 CWD = getcwd()
 

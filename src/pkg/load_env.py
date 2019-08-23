@@ -1,8 +1,5 @@
 from environs import Env
 
-CONFIG_PATH = 'CONFIG_PATH'
-PRECISION = 'PRECISION'
-
 
 def load_env(process_dir: str) -> Env:
     """

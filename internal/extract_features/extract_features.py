@@ -3,7 +3,7 @@ import pandas as pd
 
 from internal.extract_features.compile_epochs import compile_epochs
 from src.features.base.data_source.compile_data_sources import compile_data_sources
-import internal.extract_features.config_constants as constants
+import src.pkg.config_constants as constants
 
 
 def _character_config(compiled_epochs: dict, data_source_factory: dict) -> dict:

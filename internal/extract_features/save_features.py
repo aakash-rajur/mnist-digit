@@ -1,8 +1,11 @@
 from os import path
 import pandas as pd
 
-from internal.extract_features.config_constants import \
-    FILE_NAME_TEMPLATE_CHARACTER_PARTIAL, FILE_NAME_TEMPLATE_VERSION_PARTIAL, FILE_NAME_TEMPLATE
+from src.pkg.config_constants import \
+    FILE_NAME_TEMPLATE_CHARACTER_PARTIAL, \
+    FILE_NAME_TEMPLATE_VERSION_PARTIAL, \
+    FILE_NAME_TEMPLATE, \
+    FILE_EXTENSION
 
 
 def _generate_feature_file_name(character: str, version: int):
@@ -14,7 +17,11 @@ def _generate_feature_file_name(character: str, version: int):
         FILE_NAME_TEMPLATE_VERSION_PARTIAL,
         str(version)
     )
-    return with_version
+    with_extension = '{0}.{1}'.format(
+        with_version,
+        FILE_EXTENSION
+    )
+    return with_extension
 
 
 def save_features(output_dir: str, character: str, features: pd.DataFrame, version: int = 1):

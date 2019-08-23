@@ -27,20 +27,19 @@ def transform_to_relative_coordinates(
     ], axis=1)
 
     dx = _construct_df_key(x_key)
-    dy = _construct_df_scale_key(y_key)
+    dy = _construct_df_key(y_key)
 
     df[dx] = df[x_key] - xc
     df[dy] = df[y_key] - yc
-    length = df['l'] = (df[dx] ** 2 + df[dy] ** 2) ** 0.5
+    df['l'] = (df[dx] ** 2 + df[dy] ** 2) ** 0.5
 
-    max_index = length.idxmax()
-    x, y = df.loc[max_index, [dx, dy]]
+    largest_ordinate = df[[dx, dy]].abs().values.max()
 
     x_scaled = _construct_df_scale_key(x_key)
     y_scaled = _construct_df_scale_key(y_key)
 
-    df[x_scaled] = df[dx] / x
-    df[y_scaled] = df[dy] / y
+    df[x_scaled] = df[dx] / largest_ordinate
+    df[y_scaled] = df[dy] / largest_ordinate
 
     df = df.sort_values(by=['l'], ascending=False)
 

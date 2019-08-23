@@ -74,9 +74,10 @@ def compile_data_sources(
     """
     executor = _compile_data_source_parallel if parallel else \
         _compile_data_source_serial
-    return pd.DataFrame(
+    compiled = pd.DataFrame(
         executor(
             data_sources=data_sources,
             show_progress=show_progress
         )
     )
+    return compiled.dropna()
