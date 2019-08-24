@@ -1,8 +1,6 @@
 import sys
 from pathlib import Path
 
-from src.pkg.run_process import run_process
-
 project_directory = str(Path('../..').resolve())
 sys.path.extend([project_directory])
 
@@ -17,6 +15,7 @@ from internal.feature_analysis.reduce_dimensions import reduce_dimensions
 from src.pkg.config_constants import PCA_COMPONENTS, INPUT
 from src.pkg.load_config import load_config
 from src.pkg.load_env import load_env
+from src.pkg.run_process import run_process
 
 PATH = 'PATH'
 MIME = 'MIME'
