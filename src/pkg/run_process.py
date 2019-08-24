@@ -12,5 +12,3 @@ def run_process(function: Callable[[], Any], cleanup: Callable[[], Any] = None):
         else:
             print("Process Interrupted, Exiting!")
             sys.exit(0)
-    else:
-        raise
