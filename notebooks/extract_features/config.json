@@ -1,0 +1,95 @@
+{
+  "OUTPUT": "data/processed",
+  "SOURCES": [
+    {
+      "CHARACTER": "0",
+      "INPUT": "data/external/mnist/train/0",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "1",
+      "INPUT": "data/external/mnist/train/1",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "2",
+      "INPUT": "data/external/mnist/train/2",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "3",
+      "INPUT": "data/external/mnist/train/3",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "4",
+      "INPUT": "data/external/mnist/train/4",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "5",
+      "INPUT": "data/external/mnist/train/5",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "6",
+      "INPUT": "data/external/mnist/train/6",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "7",
+      "INPUT": "data/external/mnist/train/7",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "8",
+      "INPUT": "data/external/mnist/train/8",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    },
+    {
+      "CHARACTER": "9",
+      "INPUT": "data/external/mnist/train/9",
+      "TYPE": "MNIST",
+      "MIMES": [
+        "jpg",
+        "jpeg"
+      ]
+    }
+  ]
+}
