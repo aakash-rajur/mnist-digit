@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
 
-
 project_directory = str(Path('../..').resolve())
 sys.path.extend([project_directory])
 
