@@ -1,8 +1,10 @@
 import sys
 from pathlib import Path
 
-project_directory = Path('../..').resolve()
-sys.path.extend(['../..'])
+from src.pkg.run_process import run_process
+
+project_directory = str(Path('../..').resolve())
+sys.path.extend([project_directory])
 
 from os import getcwd, path
 import plotly.express as px
@@ -58,4 +60,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_process(function=main)
