@@ -1,5 +1,13 @@
+import sys
+from pathlib import Path
+
+from src.pkg.run_process import run_process
+
+project_directory = str(Path('../..').resolve())
+sys.path.extend([project_directory])
+
 from functools import partial
-from os import getcwd, path
+from os import getcwd
 
 from environs import Env
 
@@ -18,16 +26,17 @@ def get_precision(env: Env):
 
 def main():
     cwd = getcwd()
-    process_dir = path.join(cwd, 'cmd', 'extract_features')
+    process_dir = cwd
 
     env = load_env(process_dir)
     config = load_config(process_dir, env)
     precision = get_precision(env)
-    output_dir = get_output_dir(cwd, config)
+    output_dir = get_output_dir(project_directory, config)
 
-    ds_factory = data_sources_factory(cwd, precision)
+    ds_factory = data_sources_factory(project_directory, precision)
+
     extract_features(
-        cwd=cwd,
+        cwd=project_directory,
         config=config,
         data_source_factory=ds_factory,
         parallel=True,
@@ -37,4 +46,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_process(function=main)
