@@ -1,23 +1,24 @@
-from os import path, getcwd
+from os import path
 
+import src.pkg.config_constants as constants
 from internal.extract_features.mnist.extract_process import get_mnist_instance
 from src.pkg.load_env import load_env
-import src.pkg.config_constants as constants
 
-CWD = getcwd()
 
-DATA_SOURCE_TYPE_TEMPLATE = {
-    constants.TYPE_MNIST: {
-        constants.ENV_DIR: path.join(CWD, 'internal', 'extract_features', 'mnist'),
-        constants.DATA_SOURCE_INSTANCE: get_mnist_instance
+def construct_data_source_type_template(base_dir: str) -> dict:
+    return {
+        constants.TYPE_MNIST: {
+            constants.ENV_DIR: path.join(base_dir, 'internal', 'extract_features', 'mnist'),
+            constants.DATA_SOURCE_INSTANCE: get_mnist_instance
+        }
     }
-}
 
 
-def data_sources_factory(precision: int) -> dict:
+def data_sources_factory(cwd: str, precision: int) -> dict:
     data_source_factory = {}
+    data_source_type_template = construct_data_source_type_template(cwd)
 
-    for data_source_type, data_source_template in DATA_SOURCE_TYPE_TEMPLATE.items():
+    for data_source_type, data_source_template in data_source_type_template.items():
         env_dir = data_source_template[constants.ENV_DIR]
         env = load_env(env_dir)
 

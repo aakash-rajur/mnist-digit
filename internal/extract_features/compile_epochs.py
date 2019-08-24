@@ -5,11 +5,11 @@ from src.pkg.index_epochs import index_epochs
 import src.pkg.config_constants as constants
 
 
-def compile_epochs(sources: List[dict]) -> dict:
+def compile_epochs(cwd: str, sources: List[dict]) -> dict:
     data_sources_compiled = {}
 
     for source in sources:
-        epoch_input = path.join(getcwd(), source[constants.INPUT])
+        epoch_input = path.join(cwd, source[constants.INPUT])
         mimes = source[constants.MIMES]
         epochs = index_epochs(mimes, epoch_input)
 

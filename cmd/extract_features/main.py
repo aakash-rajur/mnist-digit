@@ -25,8 +25,9 @@ def main():
     precision = get_precision(env)
     output_dir = get_output_dir(cwd, config)
 
-    ds_factory = data_sources_factory(precision)
+    ds_factory = data_sources_factory(cwd, precision)
     extract_features(
+        cwd=cwd,
         config=config,
         data_source_factory=ds_factory,
         parallel=True,

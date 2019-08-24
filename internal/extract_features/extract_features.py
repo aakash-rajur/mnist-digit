@@ -22,6 +22,7 @@ def _character_config(compiled_epochs: dict, data_source_factory: dict) -> dict:
 
 
 def extract_features(
+        cwd: str,
         config: dict,
         data_source_factory: dict,
         parallel: bool,
@@ -29,11 +30,10 @@ def extract_features(
         done_callback: Callable[[str, pd.DataFrame], Any]
 ):
     sources = config[constants.SOURCES]
-    compiled_epochs = compile_epochs(sources)
+    compiled_epochs = compile_epochs(cwd, sources)
 
     character_configs = _character_config(compiled_epochs, data_source_factory)
 
     for character, data_sources in character_configs.items():
         print('PROCESSING DATA SOURCES FOR CHARACTER: {0}'.format(character))
         done_callback(character, compile_data_sources(data_sources, parallel, show_progress))
-
