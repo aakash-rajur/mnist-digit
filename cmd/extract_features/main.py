@@ -12,8 +12,8 @@ from environs import Env
 from internal.extract_features.data_sources_factory import data_sources_factory
 from internal.extract_features.extract_features import extract_features
 from internal.extract_features.save_features import save_features
-from src.pkg.config_constants import PRECISION
-from src.pkg.get_output_dir import get_output_dir
+from src.pkg.config_constants import PRECISION, OUTPUT
+from src.pkg.ensure_dir import ensure_dir
 from src.pkg.load_config import load_config
 from src.pkg.load_env import load_env
 from src.pkg.run_process import run_process
@@ -30,7 +30,7 @@ def main():
     env = load_env(process_dir)
     config = load_config(process_dir, env)
     precision = get_precision(env)
-    output_dir = get_output_dir(project_directory, config)
+    output_dir = ensure_dir(project_directory, config[OUTPUT])
 
     ds_factory = data_sources_factory(project_directory, precision)
 
