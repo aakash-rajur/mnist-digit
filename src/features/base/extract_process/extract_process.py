@@ -14,4 +14,4 @@ class ExtractProcess(ABC):
         parse that specific variant of data to extract features
         :return:
         """
-        raise NotImplemented()
+        raise NotImplementedError()
