@@ -1,4 +1,7 @@
 from os import path
+
+import pandas as pd
+
 from src.pkg.index_epochs import index_epochs
 from src.pkg.config_constants import \
     FILE_META_EXTRACTOR_REGEX, \
@@ -20,3 +23,20 @@ def list_relevant_files(cwd: str, mime: str, directory: str):
         files.append(path.join(cwd, file_path))
         meta[character] = files
     return meta
+
+
+def load_features(base_dir: str, dir: str, mime: str):
+    files_dir = path.join(base_dir, dir)
+    feature_files = index_epochs([mime], files_dir)
+
+    features = pd.concat(
+        map(
+            lambda file_path: pd.read_csv(
+                filepath_or_buffer=file_path,
+                header=None,
+            ),
+            feature_files
+        )
+    )
+
+    return features

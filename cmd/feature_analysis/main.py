@@ -4,15 +4,13 @@ from pathlib import Path
 project_directory = str(Path('../..').resolve())
 sys.path.extend([project_directory])
 
-from os import getcwd, path
+from os import getcwd
 import plotly.express as px
 from environs import Env
 
-from internal.feature_analysis.compile_epochs import compile_epochs
-from internal.feature_analysis.index_character_epochs import index_character_epochs, flatten_character_index
-from internal.feature_analysis.list_relevant_file import list_relevant_files
+from internal.feature_analysis.list_relevant_file import load_features
 from internal.feature_analysis.reduce_dimensions import reduce_dimensions
-from src.pkg.config_constants import PCA_COMPONENTS, INPUT
+from src.pkg.config_constants import PCA_COMPONENTS, INPUT, CHARACTER
 from src.pkg.load_config import load_config
 from src.pkg.load_env import load_env
 from src.pkg.run_process import run_process
@@ -37,21 +35,21 @@ def main():
     env = load_env(process_dir)
     config = load_config(process_dir, env)
     pca_dimensions = get_pca_dimensions(env)
-    path_name, mime = get_input(config)
+    input_dir_name, mime = get_input(config)
 
-    meta = list_relevant_files(project_directory, mime, path.join(project_directory, path_name))
-    epochs = compile_epochs(meta)
+    features = load_features(project_directory, input_dir_name, mime)
+    data_points = features.iloc[:, :-1]
 
-    indexed = index_character_epochs(epochs)
-    reduced = reduce_dimensions(pca_dimensions, indexed)
-    flattened = flatten_character_index(reduced)
+    reduced = reduce_dimensions(pca_dimensions, data_points)
+    reduced[CHARACTER] = features.iloc[:, -1].astype(str)
+    reduced = reduced.rename(columns={0: 'x', 1: 'y', 2: 'z'})
 
     fig = px.scatter_3d(
-        flattened,
+        reduced,
         x='x',
         y='y',
         z='z',
-        color='character',
+        color=CHARACTER,
         height=900,
         width=900,
     )
