@@ -47,4 +47,6 @@ def extract_features(
                 compiled,
                 processed
             ])
-        done_callback(compiled)
+        if done_callback is not None:
+            done_callback(compiled)
+    return compiled
