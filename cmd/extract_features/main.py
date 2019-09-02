@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 
+
 project_directory = str(Path('../..').resolve())
 sys.path.extend([project_directory])
 
@@ -16,6 +17,7 @@ from src.pkg.config_constants import PRECISION, OUTPUT
 from src.pkg.ensure_dir import ensure_dir
 from src.pkg.load_config import load_config
 from src.pkg.load_env import load_env
+from src.pkg.random_hash import generate_random_hash
 from src.pkg.run_process import run_process
 
 
@@ -34,13 +36,16 @@ def main():
 
     ds_factory = data_sources_factory(project_directory, precision)
 
+    version = generate_random_hash(5)
+    done_callback = partial(save_features, output_dir, version)
+
     extract_features(
         cwd=project_directory,
         config=config,
         data_source_factory=ds_factory,
         parallel=True,
         show_progress=True,
-        done_callback=partial(save_features, output_dir)
+        done_callback=done_callback,
     )
 
 

@@ -3,7 +3,7 @@ import pandas as pd
 
 from internal.extract_features.compile_epochs import compile_epochs
 from src.features.base.data_source.compile_data_sources import compile_data_sources
-import src.pkg.config_constants as constants
+from src.pkg.config_constants import SOURCES, CHARACTER
 
 
 def _character_config(compiled_epochs: dict, data_source_factory: dict) -> dict:
@@ -27,13 +27,24 @@ def extract_features(
         data_source_factory: dict,
         parallel: bool,
         show_progress: bool,
-        done_callback: Callable[[str, pd.DataFrame], Any]
+        done_callback: Callable[[pd.DataFrame], Any]
 ):
-    sources = config[constants.SOURCES]
+    sources = config[SOURCES]
     compiled_epochs = compile_epochs(cwd, sources)
 
     character_configs = _character_config(compiled_epochs, data_source_factory)
 
+    compiled = None
+
     for character, data_sources in character_configs.items():
         print('PROCESSING DATA SOURCES FOR CHARACTER: {0}'.format(character))
-        done_callback(character, compile_data_sources(data_sources, parallel, show_progress))
+        processed = compile_data_sources(data_sources, parallel, show_progress)
+        processed[CHARACTER] = character
+        if compiled is None:
+            compiled = processed
+        else:
+            compiled = pd.concat([
+                compiled,
+                processed
+            ])
+        done_callback(compiled)
