@@ -2,7 +2,7 @@
   "0": {
     "INPUT": "models/0",
     "MODEL": {
-      "INPUT": 14,
+      "INPUT": 16,
       "OUTPUT": 1,
       "OUTPUT_ACTIVATION": "softmax",
       "LAYERS": [
