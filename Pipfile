@@ -18,7 +18,8 @@ notebook = "*"
 ipywidgets = "*"
 jupyterlab = "*"
 nbformat = "*"
-#tensorflow = "==2.0.0-rc0"
+tensorflow = "==2.0.0-rc0"
+tf-nightly-2-0-preview = "*"
 
 [requires]
 python_version = "3.7"
