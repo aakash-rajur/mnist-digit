@@ -1,0 +1,25 @@
+{
+  "0": {
+    "INPUT": "models/0",
+    "MODEL": {
+      "INPUT": 14,
+      "OUTPUT": 1,
+      "OUTPUT_ACTIVATION": "softmax",
+      "LAYERS": [
+        {
+          "UNITS": 13,
+          "ACTIVATION": "tanh"
+        },
+        {
+          "UNITS": 10,
+          "ACTIVATION": "tanh"
+        }
+      ],
+      "LOSS": "binary_crossentropy",
+      "OPTIMIZER": "adam",
+      "METRICS": [
+        "binary_accuracy"
+      ]
+    }
+  }
+}
