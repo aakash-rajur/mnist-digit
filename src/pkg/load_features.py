@@ -5,8 +5,8 @@ import pandas as pd
 from src.pkg.index_epochs import index_epochs
 
 
-def load_features(base_dir: str, dir: str, mime: str):
-    files_dir = path.join(base_dir, dir)
+def load_features(base_dir: str, files_dir: str, mime: str) -> pd.DataFrame:
+    files_dir = path.join(base_dir, files_dir)
     feature_files = index_epochs([mime], files_dir)
 
     features = pd.concat(

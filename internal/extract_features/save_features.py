@@ -2,13 +2,13 @@ from os import path
 
 import pandas as pd
 
-from src.pkg.config_constants import FILE_EXTENSION
+from src.pkg.config_constants import FEATURE_FILE_EXTENSION
 
 
 def save_features(output_dir: str, version: str, features: pd.DataFrame):
     file_name = '{0}.{1}'.format(
         version,
-        FILE_EXTENSION
+        FEATURE_FILE_EXTENSION
     )
     file_path = path.join(output_dir, file_name)
     features.to_csv(

@@ -8,7 +8,7 @@ from os import getcwd
 import plotly.express as px
 from environs import Env
 
-from internal.feature_analysis.list_relevant_file import load_features
+from src.pkg.load_features import load_features
 from internal.feature_analysis.reduce_dimensions import reduce_dimensions
 from src.pkg.config_constants import PCA_COMPONENTS, INPUT, CHARACTER
 from src.pkg.load_config import load_config
