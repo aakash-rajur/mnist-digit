@@ -1,5 +1,5 @@
 {
-  "OUTPUT": "data/processed",
+  "OUTPUT": "data/processed/training",
   "SOURCES": [
     {
       "CHARACTER": "0",

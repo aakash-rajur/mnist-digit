@@ -43,10 +43,7 @@ def extract_features(
         if compiled is None:
             compiled = processed
         else:
-            compiled = pd.concat([
-                compiled,
-                processed
-            ])
+            compiled = compiled.append(processed, ignore_index=True)
         if done_callback is not None:
             done_callback(compiled)
     return compiled

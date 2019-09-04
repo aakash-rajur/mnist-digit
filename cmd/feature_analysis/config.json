@@ -1,7 +1,7 @@
 {
   "OUTPUT": "reports/figures",
   "INPUT": {
-    "PATH": "data/processed",
+    "PATH": "data/processed/training",
     "MIME": "csv"
   }
 }
