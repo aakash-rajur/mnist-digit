@@ -3,7 +3,7 @@ from os import path
 # noinspection PyUnresolvedReferences,PyPackageRequirements
 from tensorflow.python import keras
 
-from src.pkg.index_epochs import index_epochs
+from src.pkg.index_files import index_files
 
 KERAS_MODEL_EXTENSION = "h5"
 KERAS_MODEL_CHECKPOINT_EXTENSION = "ckpt"
@@ -14,7 +14,7 @@ def _create_model_name(model_name: str) -> str:
 
 
 def _get_latest_model_path(model_dir: str, file_name: str) -> str:
-    all_models = index_epochs([KERAS_MODEL_EXTENSION], model_dir)
+    all_models = index_files([KERAS_MODEL_EXTENSION], model_dir)
     no_of_models = len(all_models)
     if no_of_models == 0:
         return path.join(model_dir, _create_model_name(file_name))

@@ -1,7 +1,7 @@
 from os import getcwd, path
 from typing import List
 
-from src.pkg.index_epochs import index_epochs
+from src.pkg.index_files import index_files
 import src.pkg.config_constants as constants
 
 
@@ -11,7 +11,7 @@ def compile_epochs(cwd: str, sources: List[dict]) -> dict:
     for source in sources:
         epoch_input = path.join(cwd, source[constants.INPUT])
         mimes = source[constants.MIMES]
-        epochs = index_epochs(mimes, epoch_input)
+        epochs = index_files(mimes, epoch_input)
 
         character = source[constants.CHARACTER]
         data_source_type = source[constants.DATA_SOURCE_TYPE]
