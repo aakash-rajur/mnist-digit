@@ -5,6 +5,9 @@ import pandas as pd
 
 
 class Model(ABC):
+    def __init__(self, model_dir: str, config: dict):
+        pass
+
     @abstractmethod
     def save(self):
         raise NotImplementedError()

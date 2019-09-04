@@ -1,7 +1,8 @@
 {
   "0": {
-    "INPUT": "models/0",
+    "SAVE": "models/0",
     "MODEL": {
+      "TYPE": "KERAS",
       "INPUT": 16,
       "OUTPUT": 1,
       "OUTPUT_ACTIVATION": "softmax",

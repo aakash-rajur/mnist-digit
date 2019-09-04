@@ -1,15 +1,27 @@
+from os import path
+from datetime import datetime, timezone
+
 import pandas as pd
 # noinspection PyUnresolvedReferences,PyPackageRequirements
 from tensorflow.python import keras
 
 from src.models.base.model import Model
 from src.models.keras.build import _build_keras_model
-from src.models.keras.load import _load_keras_model
+from src.models.keras.load import \
+    _load_keras_model, \
+    KERAS_MODEL_CHECKPOINT_EXTENSION, \
+    _get_latest_model_path, \
+    _create_model_name
+
+ModelCheckpoint = keras.callbacks.ModelCheckpoint
 
 
 def _checkpoint_save(model_path: str) -> keras.callbacks.Callback:
-    checkpoint_path_name = '{0}.ckpt'.format(model_path)
-    cp_callback = keras.callbacks.ModelCheckpoint(
+    checkpoint_path_name = '{0}.{1}'.format(
+        model_path,
+        KERAS_MODEL_CHECKPOINT_EXTENSION
+    )
+    cp_callback = ModelCheckpoint(
         filepath=checkpoint_path_name,
         verbose=1
     )
@@ -17,18 +29,24 @@ def _checkpoint_save(model_path: str) -> keras.callbacks.Callback:
 
 
 class KerasModel(Model):
+    _model_dir: str
     _model_path: str
     _keras_instance: keras.Model
 
-    def __init__(self, model_path, config):
-        self._model_path = model_path
+    def __init__(self, model_dir: str, config: dict):
+        super(KerasModel, self).__init__(model_dir, config)
+        self._model_dir = model_dir
+        model_name = datetime.now(timezone.utc).isoformat()
+        self._model_path = _get_latest_model_path(self._model_dir, model_name)
         self._keras_instance = _load_keras_model(self._model_path)
-        if not self._keras_instance:
+        if self._keras_instance is None:
             self._keras_instance = _build_keras_model(config)
         self._checkpoint_cb = _checkpoint_save(self._model_path)
 
     def save(self):
-        self._keras_instance.save(self._model_path)
+        model_name = datetime.now(timezone.utc).isoformat()
+        model_path = path.join(self._model_dir, _create_model_name(model_name))
+        self._keras_instance.save(model_path)
 
     def train(
             self,
